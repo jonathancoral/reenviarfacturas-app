@@ -2,334 +2,372 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gestor FE • Unicomfacauca</title>
   
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#fdfbff">
+  <meta name="theme-color" content="#eff1f8">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Gestor FE">
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
 
   <style>
-    /* ========================================
-    TOKENS: MATERIAL 3 EXPRESSIVE
-    ========================================
-    */
     :root {
-      /* Color: Blue Tonal Palette (Expressive) */
-      --md-sys-color-primary: #004991;
+      /* M3 Expressive Blue Tokens */
+      --md-sys-color-primary: #004a77;
       --md-sys-color-on-primary: #ffffff;
-      --md-sys-color-primary-container: #d6e3ff;
-      --md-sys-color-on-primary-container: #001b3e;
+      --md-sys-color-primary-container: #cce5ff;
+      --md-sys-color-on-primary-container: #001d32;
       
       --md-sys-color-secondary-container: #dce2f9;
       --md-sys-color-on-secondary-container: #151b2c;
 
       --md-sys-color-surface: #fdfbff;
-      --md-sys-color-surface-dim: #f8f9ff;
-      --md-sys-color-surface-container: #eff1f8;
+      --md-sys-color-surface-container: #eff1f8; /* Fondo principal */
       --md-sys-color-surface-container-high: #e9ecf4;
       
       --md-sys-color-on-surface: #191c20;
       --md-sys-color-on-surface-variant: #43474e;
       
       --md-sys-color-outline-variant: #c3c7cf;
-      --md-sys-color-success: #146c2e;
 
-      /* Shapes: Expressive Corner Radii */
-      --shape-corner-xl: 28px;
-      --shape-corner-l: 16px;
-      --shape-corner-full: 9999px;
+      /* Shapes */
+      --shape-xl: 32px;
+      --shape-l: 24px;
+      --shape-full: 999px;
 
-      /* Typography: Roboto Flex */
-      --font-display: 'Roboto Flex', sans-serif;
+      /* Typography */
+      --font-base: 'Roboto Flex', sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background-color: var(--md-sys-color-surface);
+      background-color: var(--md-sys-color-surface-container);
       color: var(--md-sys-color-on-surface);
-      font-family: var(--font-display);
+      font-family: var(--font-base);
       min-height: 100vh;
       display: flex;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      animation: fadeIn 0.8s cubic-bezier(0.2, 0, 0, 1) forwards;
-      /* Evitar rebote en iOS PWA */
-      overscroll-behavior-y: none;
+      flex-direction: column;
+      padding: 0;
+      overscroll-behavior-y: none; /* Previene rebote en iOS */
     }
 
-    /* Layout Principal */
-    .expressive-layout {
+    /* HEADER: Estilo "App Bar" limpio */
+    header {
+      padding: 24px 24px 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .app-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-overline {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--md-sys-color-on-surface-variant);
+      opacity: 0.8;
+    }
+
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    /* CHIP DE USUARIO */
+    .user-chip {
+      background-color: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      padding: 6px 16px 6px 8px;
+      border-radius: var(--shape-full);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.2s;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .user-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    main {
+      flex: 1;
       width: 100%;
       max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px 40px 24px;
       display: grid;
-      grid-template-columns: 1fr;
       gap: 24px;
-      /* Padding extra para zona segura de iPhone */
-      padding-bottom: env(safe-area-inset-bottom);
+      grid-template-columns: 1fr;
+      align-content: start;
     }
 
     @media (min-width: 900px) {
-      .expressive-layout {
-        grid-template-columns: 400px 1fr;
+      main {
+        grid-template-columns: 420px 1fr; /* Panel izq fijo, derecha fluido */
         align-items: start;
-        margin-top: 4vh;
+        padding-top: 40px;
       }
     }
 
-    /* Columna Izquierda: Hero & Acción */
-    .hero-section {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      background-color: var(--md-sys-color-secondary-container);
-      color: var(--md-sys-color-on-secondary-container);
-      padding: 6px 16px;
-      border-radius: var(--shape-corner-full);
-      font-size: 0.875rem;
-      font-weight: 500;
-      width: fit-content;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 350; /* Light/Expressive */
-      line-height: 1.1;
-      letter-spacing: -1px;
-      color: var(--md-sys-color-on-surface);
-    }
-
-    /* Card de Acción Principal */
-    .action-card {
+    /* TARJETA DE ACCIÓN (PANEL IZQ) */
+    .control-panel {
       background-color: var(--md-sys-color-primary-container);
       color: var(--md-sys-color-on-primary-container);
-      border-radius: var(--shape-corner-xl);
-      padding: 32px;
+      border-radius: var(--shape-xl);
+      padding: 40px 32px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      justify-content: space-between;
+      gap: 40px;
+      min-height: 360px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       position: relative;
       overflow: hidden;
     }
 
-    .stat-number {
-      font-size: 5rem;
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -2px;
+    /* Elemento decorativo de fondo */
+    .control-panel::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
-    .stat-label {
-      font-size: 1rem;
+    .stats-group h1 {
+      font-size: 5.5rem;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 8px;
+    }
+
+    .stats-group p {
+      font-size: 1.1rem;
       font-weight: 500;
       opacity: 0.8;
     }
 
-    /* Botón FAB Extendido (Estilo M3) */
-    .btn-primary {
+    /* FAB EXTENDIDO */
+    .btn-sync {
       background-color: var(--md-sys-color-primary);
       color: var(--md-sys-color-on-primary);
       border: none;
-      padding: 20px 32px;
-      border-radius: var(--shape-corner-full);
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 500;
+      padding: 24px 32px;
+      border-radius: var(--shape-xl);
+      font-family: var(--font-base);
+      font-size: 1.125rem;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 16px;
       transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      /* Para tacto en móviles */
-      touch-action: manipulation;
+      box-shadow: 0 4px 10px rgba(0, 74, 119, 0.2);
+      width: 100%;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .btn-primary:hover {
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-      transform: translateY(-2px);
+    .btn-sync:active {
+      transform: scale(0.97);
     }
 
-    .btn-primary:active {
-      transform: scale(0.98);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .btn-primary:disabled {
-      background-color: var(--md-sys-color-on-surface-variant);
-      opacity: 0.12;
-      color: var(--md-sys-color-on-surface);
+    .btn-sync:disabled {
+      background-color: rgba(255,255,255,0.5);
+      color: rgba(0,0,0,0.4);
       box-shadow: none;
-      cursor: not-allowed;
-      transform: none;
+      cursor: wait;
     }
 
-    /* Columna Derecha: Lista de Resultados */
-    .results-container {
-      background-color: var(--md-sys-color-surface-container-high);
-      border-radius: var(--shape-corner-xl);
-      padding: 24px;
+    /* LISTA DE ACTIVIDAD (PANEL DER) */
+    .feed-section {
+      background-color: var(--md-sys-color-surface);
+      border-radius: var(--shape-xl);
+      padding: 32px;
       min-height: 400px;
       display: flex;
       flex-direction: column;
     }
 
-    .list-header {
+    .feed-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 24px;
-      padding-left: 8px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--md-sys-color-surface-container-high);
     }
 
-    .list-header h2 {
+    .feed-header h2 {
       font-size: 1.25rem;
       font-weight: 500;
+      color: var(--md-sys-color-on-surface);
     }
 
-    .log-list {
+    .feed-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
     }
 
+    /* ITEM DE LISTA */
     .log-item {
-      background-color: var(--md-sys-color-surface);
-      padding: 16px 20px;
-      border-radius: var(--shape-corner-l);
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 16px;
       align-items: center;
-      animation: slideUp 0.4s ease-out;
+      padding: 12px 0;
+      animation: slideIn 0.5s cubic-bezier(0.2, 0, 0, 1);
     }
 
-    .log-text {
-      font-size: 0.95rem;
-      font-weight: 400;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 80%;
+    .icon-box {
+      width: 40px;
+      height: 40px;
+      background-color: var(--md-sys-color-surface-container-high);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--md-sys-color-primary);
     }
 
-    .status-badge {
-      color: var(--md-sys-color-success);
-      font-weight: 600;
+    .log-content {
+      font-family: 'Roboto Mono', monospace; /* Monospace para datos técnicos */
       font-size: 0.85rem;
-      background: #e6f6e9;
-      padding: 4px 10px;
-      border-radius: 8px;
+      color: var(--md-sys-color-on-surface);
+      line-height: 1.4;
+      word-break: break-all;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--md-sys-color-on-surface-variant);
+      opacity: 0.6;
     }
 
-    /* Loader */
-    .loader {
+    /* Loader Spinner */
+    .spinner {
       width: 24px;
       height: 24px;
       border: 3px solid rgba(255,255,255,0.3);
-      border-top-color: #fff;
+      border-top-color: #ffffff;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       display: none;
     }
     
-    .btn-primary.loading .loader { display: block; }
-    .btn-primary.loading .btn-text { display: none; }
-    .btn-primary.loading .material-symbols-rounded { display: none; }
+    .btn-sync.loading .spinner { display: block; }
+    .btn-sync.loading .label { display: none; }
+    .btn-sync.loading .material-symbols-rounded { display: none; }
 
-    /* Animaciones */
-    @keyframes fadeIn { to { opacity: 1; } }
     @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes slideUp { 
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes slideIn { 
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Footer */
-    footer {
-      grid-column: 1 / -1;
-      text-align: center;
-      margin-top: 40px;
-      color: var(--md-sys-color-on-surface-variant);
-      font-size: 0.75rem;
-      padding-bottom: 20px;
-    }
   </style>
 </head>
 <body>
 
-  <div class="expressive-layout">
+  <header>
+    <div class="app-brand">
+      <span class="brand-overline">Unicomfacauca</span>
+      <span class="brand-title">Gestor FE</span>
+    </div>
     
-    <section class="hero-section">
-      <div>
-        <span class="badge">Unicomfacauca • Jonathan Coral</span>
-        <h1>Facturación<br>Electrónica</h1>
+    <div class="user-chip">
+      <div class="avatar">J</div>
+      <span class="user-name">Jonathan Coral</span>
+    </div>
+  </header>
+
+  <main>
+    
+    <section class="control-panel">
+      <div class="stats-group">
+        <div id="counter">0</div>
+        <p>Envíos en esta sesión</p>
       </div>
 
-      <div class="action-card">
-        <div>
-          <div id="counter" class="stat-number">0</div>
-          <p class="stat-label">Facturas procesadas hoy</p>
-        </div>
-        
-        <button id="syncBtn" class="btn-primary" onclick="runProcess()">
-          <span class="material-symbols-rounded">sync</span>
-          <span class="btn-text">Iniciar Sincronización</span>
-          <div class="loader"></div>
-        </button>
-      </div>
+      <button id="syncBtn" class="btn-sync" onclick="runProcess()">
+        <span class="material-symbols-rounded" style="font-size: 1.5rem;">cloud_sync</span>
+        <span class="label">Sincronizar Gmail</span>
+        <div class="spinner"></div>
+      </button>
     </section>
 
-    <section class="results-container">
-      <div class="list-header">
-        <span class="material-symbols-rounded">history</span>
+    <section class="feed-section">
+      <div class="feed-header">
+        <span class="material-symbols-rounded" style="color:var(--md-sys-color-primary)">list_alt</span>
         <h2>Registro de actividad</h2>
       </div>
-      
-      <div id="logContainer" class="log-list">
-        <div style="text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 40px; opacity: 0.6;">
-          <p>El sistema está listo.</p>
-          <p style="font-size: 0.8rem; margin-top:8px;">Presiona iniciar para buscar en Gmail.</p>
+
+      <div id="logContainer" class="feed-list">
+        <div class="empty-state">
+          <span class="material-symbols-rounded" style="font-size: 48px; margin-bottom: 16px;">inbox</span>
+          <p>Sistema listo para procesar.</p>
         </div>
       </div>
     </section>
 
-    <footer>
-      FE Manager v4.0 • Material Design 3 Expressive
-    </footer>
-
-  </div>
+  </main>
 
   <script>
     // ==========================================
-    // CONFIGURACIÓN DE CONEXIÓN
+    // CONFIGURACIÓN
     // ==========================================
+    // RECUERDA: PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxw7HqEiFfiLiH9-v_xj1SWqTju28Ru6h9T0OF2_CWKznZiH73J1DYdZ_IAltJlsaLX/exec"; 
 
-    // Referencias DOM
+    // Referencias
     const btn = document.getElementById('syncBtn');
-    const counter = document.getElementById('counter');
+    const counterDisplay = document.getElementById('counter');
     const logContainer = document.getElementById('logContainer');
 
+    // Lógica Principal
     async function runProcess() {
       if (GAS_API_URL.includes("PEGAR_TU_URL")) {
-        alert("⚠️ Error de configuración: Debes pegar la URL de tu Web App en el código HTML.");
+        alert("⚠️ Configuración incompleta: Edita el index.html y pon tu URL de Apps Script.");
         return;
       }
 
@@ -337,7 +375,8 @@
 
       try {
         const response = await fetch(GAS_API_URL);
-        if (!response.ok) throw new Error("Error de red al conectar con Google");
+        if (!response.ok) throw new Error("Error de conexión");
+        
         const data = await response.json();
         
         if (data.status === 'success') {
@@ -345,38 +384,51 @@
         } else {
           showError(data.message);
         }
+
       } catch (error) {
         console.error(error);
-        showError("No se pudo conectar con el servidor. Verifica conexión.");
+        showError("Error de conexión con Google.");
       } finally {
         setLoading(false);
       }
     }
 
     function updateUI(data) {
-      const currentCount = parseInt(counter.innerText);
-      animateValue(counter, currentCount, currentCount + data.procesados, 1000);
+      // 1. Animar contador
+      const currentVal = parseInt(counterDisplay.innerText);
+      animateValue(counterDisplay, currentVal, currentVal + data.procesados, 1000);
 
+      // 2. Actualizar lista
       if (data.asuntos && data.asuntos.length > 0) {
-        if (logContainer.children[0]?.innerText.includes("El sistema está listo")) {
-          logContainer.innerHTML = '';
-        }
+        // Si hay mensaje de "vacio", borrarlo
+        const emptyState = logContainer.querySelector('.empty-state');
+        if (emptyState) emptyState.remove();
 
         data.asuntos.forEach(asunto => {
+          // Lógica de limpieza: Tomar solo hasta el tercer ;
+          const partes = asunto.split(';');
+          // Unir las primeras 3 partes si existen, si no, dejar original
+          const asuntoLimpio = partes.length >= 3 ? partes.slice(0, 3).join(';') : asunto;
+
           const item = document.createElement('div');
           item.className = 'log-item';
           item.innerHTML = `
-            <span class="log-text">${asunto}</span>
-            <span class="status-badge">Enviado</span>
+            <div class="icon-box">
+              <span class="material-symbols-rounded" style="font-size:20px">check</span>
+            </div>
+            <div class="log-content">${asuntoLimpio}</div>
           `;
-          logContainer.prepend(item); 
+          logContainer.prepend(item);
         });
       } else {
+        // Feedback sutil si no hubo nada nuevo (Toast o log temporal)
         const item = document.createElement('div');
         item.className = 'log-item';
-        item.style.backgroundColor = 'transparent';
         item.innerHTML = `
-          <span class="log-text" style="opacity:0.6">No se encontraron facturas nuevas</span>
+          <div class="icon-box" style="background-color:transparent; color: var(--md-sys-color-on-surface-variant)">
+            <span class="material-symbols-rounded" style="font-size:20px">info</span>
+          </div>
+          <div class="log-content" style="color: var(--md-sys-color-on-surface-variant)">No se encontraron facturas nuevas</div>
         `;
         logContainer.prepend(item);
       }
@@ -395,9 +447,11 @@
     function showError(msg) {
       const item = document.createElement('div');
       item.className = 'log-item';
-      item.style.borderLeft = '4px solid #ba1a1a';
       item.innerHTML = `
-        <span class="log-text" style="color: #ba1a1a;">Error: ${msg}</span>
+        <div class="icon-box" style="background-color:#ffdad6; color:#ba1a1a;">
+          <span class="material-symbols-rounded" style="font-size:20px">error</span>
+        </div>
+        <div class="log-content" style="color:#ba1a1a;">${msg}</div>
       `;
       logContainer.prepend(item);
     }
@@ -416,18 +470,10 @@
       window.requestAnimationFrame(step);
     }
 
-    // ==========================================
-    // REGISTRO DEL SERVICE WORKER (PWA)
-    // ==========================================
+    // PWA Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(registration => {
-            console.log('SW registrado correctamente:', registration.scope);
-          })
-          .catch(error => {
-            console.log('Fallo al registrar SW:', error);
-          });
+        navigator.serviceWorker.register('./sw.js');
       });
     }
   </script>
