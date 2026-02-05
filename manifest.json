@@ -1,11 +1,11 @@
 {
-  "name": "Gestor FE Unicomfacauca",
+  "name": "Gestor FE",
   "short_name": "Gestor FE",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fdfbff",
   "theme_color": "#004991",
-  "description": "Herramienta de gestión de facturación electrónica automatizada.",
+  "description": "Herramienta de reenvío de facturación electrónica automatizada.",
   "icons": [
     {
       "src": "icon-192.png",
