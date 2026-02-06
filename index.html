@@ -350,6 +350,16 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+        /* Ocultar barra de desplazamiento (Scrollbar) globalmente */
+    * {
+      -ms-overflow-style: none;  /* Internet Explorer 10+ */
+      scrollbar-width: none;  /* Firefox */
+    }
+    
+    *::-webkit-scrollbar {
+      display: none;  /* Microsoft Edge, Chrome, Safari */
+    }
+
   </style>
 </head>
 <body>
